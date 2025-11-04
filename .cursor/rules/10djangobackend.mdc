@@ -1,0 +1,24 @@
+---
+alwaysApply: true
+---
+---
+description: Specific rules for Django, DRF, and PostgreSQL ORM interaction.
+globs: ["backend/**/*.py", "*.py"]
+alwaysApply: false
+---
+# 🐍 Django Backend & Database Rules
+
+## Models (`models.py`)
+- **Use Django ORM:** Strongly prefer Django's Object-Relational Mapper (ORM) over raw SQL queries.
+- **PostgreSQL Fields:** When required, leverage specific PostgreSQL field types like `JSONField` or `ArrayField` instead of generic fields.
+- **Performance:** When fetching related objects, always use `.select_related()` for ForeignKeys and OneToOne fields, and `.prefetch_related()` for ManyToMany and reverse ForeignKeys to prevent N+1 queries.
+
+## API Views (DRF)
+- **Class-Based Views (CBVs):** Prefer Class-Based Views and DRF's built-in `generics` and `viewsets` for RESTful operations.
+- **Serializers:** Ensure all Serializers explicitly define `fields` or `exclude` in the `Meta` class.
+
+## Project Structure
+- Keep business logic separate from views. **Logic should primarily reside in model managers or service/domain layers, not directly in views.**
+
+## Logging
+- Use Python's standard `logging` module. Avoid using `print()` for debugging in generated code.

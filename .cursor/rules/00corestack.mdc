@@ -1,0 +1,25 @@
+---
+alwaysApply: true
+---
+---
+description: Core project context, architecture, and universal standards.
+alwaysApply: true
+---
+# 🚀 Core Project Architecture and Standards
+
+## Tech Stack
+- **Frontend:** React (Functional Components) with TypeScript.
+- **Backend:** Django with Django Rest Framework (DRF) and Python 3.11+.
+- **Database:** PostgreSQL.
+- **Styling:** Tailwind CSS (or replace with your CSS-in-JS/CSS solution).
+
+## Naming Conventions
+- **Python:** Use `snake_case` for variables, functions, and files. Use `PascalCase` for classes (Models, Views, Serializers).
+- **TypeScript:** Use `camelCase` for variables and functions. Use `PascalCase` for React Components and Interfaces.
+
+## Imports
+- Always use **absolute imports** within the respective `frontend/src` and `backend/` contexts.
+
+## Security
+- Always consider the possibility of **SQL Injection** and **XSS** when generating code that handles user input.
+- **Backend:** Ensure all Django views are protected (e.g., `permission_classes`, authentication).

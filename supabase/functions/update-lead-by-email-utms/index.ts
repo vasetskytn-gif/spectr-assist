@@ -5,8 +5,8 @@ const corsHeaders = {
   "Access-Control-Allow-Headers": "authorization, x-client-info, apikey, content-type",
 };
 
-const BITRIX_WEBHOOK_URL_BASE = "https://storymapper.bitrix24.com/rest/26/ft3bkdlsgtrf3bpm/";
-
+const BITRIX_WEBHOOK_URL_SEL1 = Deno.env.get("BITRIX_WEBHOOK_URL_SEL1")!;
+const BITRIX_WEBHOOK_URL_UPD = Deno.env.get("BITRIX_WEBHOOK_URL_UPD2")!;
 serve(async (req) => {
   // Handle CORS preflight requests
   if (req.method === "OPTIONS") {
@@ -40,7 +40,7 @@ serve(async (req) => {
     }
 
     // Search for Lead by Email
-    const searchUrl = `${BITRIX_WEBHOOK_URL_BASE}crm.lead.list.json`;
+    const searchUrl = `${BITRIX_WEBHOOK_URL_SEL1}crm.lead.list.json`;
     const searchBody = {
       filter: {
         "FM.EMAIL.VALUE": email,
@@ -75,7 +75,7 @@ serve(async (req) => {
     console.log("Found lead ID:", leadId);
 
     // Update the Found Lead
-    const updateUrl = `${BITRIX_WEBHOOK_URL_BASE}crm.lead.update.json`;
+    const updateUrl = `${BITRIX_WEBHOOK_URL_UPD}crm.lead.update.json`;
 
     const updateResponse = await fetch(updateUrl, {
       method: "POST",

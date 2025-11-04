@@ -1,0 +1,31 @@
+---
+alwaysApply: true
+---
+---
+description: Specific rules for React functional components, TypeScript, and state management.
+globs: ["frontend/src/**/*.{ts,tsx}"]
+alwaysApply: false
+---
+# ⚛️ React/TypeScript Frontend Rules
+
+## Component Style
+- **Functional Components ONLY.** Do not generate Class Components.
+- **Use Hooks:** Utilize standard React Hooks (`useState`, `useEffect`, `useContext`) and custom hooks for shared logic.
+- **Prop Typing:** All component props **MUST** be defined using a TypeScript `interface`. Avoid using `type` for component props.
+- **Destructuring:** Destructure props immediately in the function signature.
+- reuse existing UI components from `/src/components/ui`. these are the primitives we can build with
+- create new components by orchestrating ui components if you can't find any existing that solves the problem
+- ask the human how they want to proceed when there are missing components and designs
+## TypeScript Standards
+- **Strict Typing:** Never use the `any` type unless absolutely necessary (e.g., for legacy library integration). Find or create the correct type/interface.
+- **Interface vs. Type:** Prefer `interface` for object structures (props, state) and `type` for unions and aliases.
+- **Optional Chaining:** Use optional chaining (`?.`) and nullish coalescing (`??`) for safe data access.
+
+## Styling
+- **Tailwind:** Apply all styles using Tailwind CSS classes directly within the `className` attribute. **Do NOT** generate separate CSS files unless specifically asked to.
+
+## Data Fetching
+- Assume the use of a library like **React Query** or **SWR** for data fetching. When generating data fetching logic, use a structure similar to:
+```typescript
+const { data, isLoading, error } = useQuery(['key', id], fetchFunction);
+// Use isLoading, not just 'data' existence, to manage loading states.

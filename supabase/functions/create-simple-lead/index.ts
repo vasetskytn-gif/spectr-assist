@@ -5,7 +5,7 @@ const corsHeaders = {
   "Access-Control-Allow-Headers": "authorization, x-client-info, apikey, content-type",
 };
 
-const BITRIX_WEBHOOK_URL = "https://storymapper.bitrix24.com/rest/26/rum8iq0umq5uix6g/";
+const BITRIX_WEBHOOK_URL = Deno.env.get("BITRIX_WEBHOOK_URL_INS")!;
 
 serve(async (req) => {
   // Handle CORS preflight requests

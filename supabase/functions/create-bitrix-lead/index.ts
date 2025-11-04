@@ -5,8 +5,8 @@ const corsHeaders = {
   "Access-Control-Allow-Headers": "authorization, x-client-info, apikey, content-type",
 };
 
-const BITRIX_WEBHOOK_URL = "https://storymapper.bitrix24.com/rest/26/rum8iq0umq5uix6g/";
-const BITRIX_WEBHOOK_URL_BASE = "https://storymapper.bitrix24.com/rest/26/6cj7fij1bbb1mbuv/";
+const BITRIX_WEBHOOK_URL_SEL = Deno.env.get("BITRIX_WEBHOOK_URL_SEL")!;
+const BITRIX_WEBHOOK_URL_INS = Deno.env.get("BITRIX_WEBHOOK_URL_INS")!;
 
 serve(async (req) => {
   // Handle CORS preflight requests
@@ -17,7 +17,7 @@ serve(async (req) => {
   try {
     const { email, name, utm_source, utm_medium, utm_campaign, utm_content, fbclid, landing_page } = await req.json();
     // Search for Lead by Email
-    const searchUrl = `${BITRIX_WEBHOOK_URL_BASE}crm.lead.list.json`;
+    const searchUrl = `${BITRIX_WEBHOOK_URL_SEL}crm.lead.list.json`;
     const searchBody = {
       filter: {
         EMAIL: email,
@@ -69,7 +69,7 @@ serve(async (req) => {
       }
 
       // Call Bitrix24 API to create a lead
-      const bitrixResponse = await fetch(`${BITRIX_WEBHOOK_URL}crm.lead.add.json`, {
+      const bitrixResponse = await fetch(`${BITRIX_WEBHOOK_URL_INS}crm.lead.add.json`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
